@@ -10,3 +10,5 @@ app.put('/notes', (req, res) => {
   notes.push(req.body)
   res.sendStatus(201)
 })
+
+app.listen(3000)
