@@ -6,7 +6,7 @@ const notes = []
 
 app.use(bodyParser.json())
 
-app.put('/notes', (req, res) => {
+app.post('/notes', (req, res) => {
   notes.push(req.body)
   res.sendStatus(201)
 })
