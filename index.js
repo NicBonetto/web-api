@@ -11,4 +11,8 @@ app.post('/notes', (req, res) => {
   res.sendStatus(201)
 })
 
+app.get('/notes', (req, res) => {
+  res.json(notes)
+})
+
 app.listen(3000)
