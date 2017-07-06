@@ -15,4 +15,13 @@ app.get('/notes', (req, res) => {
   res.json(notes)
 })
 
+app.put('/notes/:id', (req, res) => {
+  notes.forEach((element, index) => {
+    if (element.id === Number(req.params.id)) {
+      notes.splice(index, 1, req.body)
+    }
+  })
+  res.sendStatus(200)
+})
+
 app.listen(3000)
