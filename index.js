@@ -3,22 +3,16 @@ const app = express()
 const bodyParser = require('body-parser')
 
 const notes = []
-let notesIndex = 0
-
-function resetID(deletedIndex) {
-  for (let i = notes.length - 1; i > deletedIndex; i--) {
-    notes[i].id -= 1
-  }
-}
+let nextID = 0
 
 app.use(bodyParser.json())
 
 app.post('/notes', (req, res) => {
   const newNote = req.body
-  newNote.id = notesIndex + 1
+  newNote.id = nextID + 1
   notes.push(newNote)
   res.sendStatus(201)
-  notesIndex++
+  nextID++
 })
 
 app.get('/notes', (req, res) => {
@@ -38,12 +32,12 @@ app.put('/notes/:id', (req, res) => {
 })
 
 app.delete('/notes/:id', (req, res) => {
-  notes.forEach((element, index) => {
-    if (element.id === Number(req.params.id)) {
-      resetID(index)
-      notes.splice(index, 1)
+  for (let i = 0; i < notes.length; i++) {
+    if (notes[i].id === Number(req.params.id)) {
+      notes.splice(notes[i], 1)
     }
-  })
+  }
+
   res.sendStatus(204)
 })
 
