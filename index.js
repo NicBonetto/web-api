@@ -20,15 +20,16 @@ app.get('/notes', (req, res) => {
 })
 
 app.put('/notes/:id', (req, res) => {
-  notes.forEach((element, index) => {
+  for (let i = 0; i < notes.length; i++) {
     let saveId
-    if (element.id === Number(req.params.id)) {
-      saveId = element.id
-      notes.splice(index, 1, req.body)
-      notes[index].id = saveId
+    if (notes[i].id === Number(req.params.id)) {
+      saveId = notes[i].id
+      notes.splice(i, 1, req.body)
+      notes[i].id = saveId
+      return res.sendStatus(200)
     }
-  })
-  res.sendStatus(200)
+  }
+  res.sendStatus(404)
 })
 
 app.delete('/notes/:id', (req, res) => {
