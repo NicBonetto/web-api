@@ -31,4 +31,13 @@ app.put('/notes/:id', (req, res) => {
   res.sendStatus(200)
 })
 
+app.delete('/notes/:id', (req, res) => {
+  notes.forEach((element, index) => {
+    if (element.id === Number(req.params.id)) {
+      notes.splice(index, 1)
+    }
+  })
+  res.sendStatus(204)
+})
+
 app.listen(3000)
