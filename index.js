@@ -38,7 +38,7 @@ app.delete('/notes/:id', (req, res) => {
       return res.sendStatus(204)
     }
   }
-  res.sendStatus(400)
+  res.sendStatus(404)
 })
 
 app.listen(3000)
