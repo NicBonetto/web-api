@@ -8,8 +8,9 @@ let notesIndex = 0
 app.use(bodyParser.json())
 
 app.post('/notes', (req, res) => {
-  notes.push(req.body)
-  notes[notesIndex].id = notesIndex + 1
+  const newNote = req.body
+  newNote.id = notesIndex + 1
+  notes.push(newNote)
   res.sendStatus(201)
   notesIndex++
 })
