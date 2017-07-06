@@ -35,10 +35,10 @@ app.delete('/notes/:id', (req, res) => {
   for (let i = 0; i < notes.length; i++) {
     if (notes[i].id === Number(req.params.id)) {
       notes.splice(notes[i], 1)
+      return res.sendStatus(204)
     }
   }
-
-  res.sendStatus(204)
+  res.sendStatus(400)
 })
 
 app.listen(3000)
