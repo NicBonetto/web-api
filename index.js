@@ -5,6 +5,12 @@ const bodyParser = require('body-parser')
 const notes = []
 let notesIndex = 0
 
+function resetID(deletedIndex) {
+  for (let i = notes.length - 1; i > deletedIndex; i--) {
+    notes[i].id -= 1
+  }
+}
+
 app.use(bodyParser.json())
 
 app.post('/notes', (req, res) => {
@@ -34,6 +40,7 @@ app.put('/notes/:id', (req, res) => {
 app.delete('/notes/:id', (req, res) => {
   notes.forEach((element, index) => {
     if (element.id === Number(req.params.id)) {
+      resetID(index)
       notes.splice(index, 1)
     }
   })
